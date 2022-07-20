@@ -4,7 +4,7 @@ A complete one-to-one chat system using websockets and django channels.
 
 <br>
 
-<img src="https://github.com/vimal-11/django_direct_message/blob/master/screenshot/ss.jpg" width="80%" height="100%">  
+<img src="https://github.com/vimal-11/django_direct_message/blob/master/screenshot/ss.jpg" width="100%" height="100%">  
 
 
 ### Channels Documentation
