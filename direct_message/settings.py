@@ -63,7 +63,7 @@ ROOT_URLCONF = 'direct_message.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'direct_message', 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
