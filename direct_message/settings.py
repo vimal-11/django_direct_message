@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from os.path import join
 from info import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dm',
+
+    # 3rd party
+    'channels',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -117,9 +124,41 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# Collect static files here
+STATIC_ROOT = join(BASE_DIR, 'run', 'static_root')
+
+# Collect media files here
+MEDIA_ROOT = join(BASE_DIR, 'run', 'media_root')
+MEDIA_URL = '/media/'
+
+# look for static assets here
+STATICFILES_DIRS = [
+    join(BASE_DIR, 'direct_message', 'static'),
+]
+
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/admin'
+LOGIN_URL = '/admin/login/'
+ALLOWED_HOSTS = ['*']
+
+# Uncomment this to try out RabbitMQ layer - install channels_rabbitmq>=3.0.0 first
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_rabbitmq.core.RabbitmqChannelLayer",
+#         "CONFIG": {
+#             "host": "amqp://guest:guest@127.0.0.1:5672/",
+#         },
+#     },
+# }
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
