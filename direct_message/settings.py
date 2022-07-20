@@ -118,6 +118,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -138,6 +140,8 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -146,6 +150,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/admin'
 LOGIN_URL = '/admin/login/'
 ALLOWED_HOSTS = ['*']
+
+
+ASGI_APPLICATION = 'direct_message.direct_message.routing.application'
+
 
 # Uncomment this to try out RabbitMQ layer - install channels_rabbitmq>=3.0.0 first
 # CHANNEL_LAYERS = {
@@ -161,4 +169,26 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer'
     }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    },
+    # Uncomment this to view django_private_chat2's logs
+
+    # 'root': {
+    #     'handlers': ['console'],
+    #     'level': 'INFO',
+    # },
 }
